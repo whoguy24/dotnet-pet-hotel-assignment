@@ -19,7 +19,7 @@ namespace dotnet_bakery.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("pet_hotel.Pet", b =>
+            modelBuilder.Entity("pet_hotel.Models.Pet", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -29,7 +29,7 @@ namespace dotnet_bakery.Migrations
                     b.Property<int>("breedType")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("checkedInAt")
+                    b.Property<DateTime?>("checkedInAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("colorType")
@@ -49,7 +49,7 @@ namespace dotnet_bakery.Migrations
                     b.ToTable("Pets");
                 });
 
-            modelBuilder.Entity("pet_hotel.PetOwner", b =>
+            modelBuilder.Entity("pet_hotel.Models.PetOwner", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -66,12 +66,12 @@ namespace dotnet_bakery.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("PetOwner");
+                    b.ToTable("PetOwners");
                 });
 
-            modelBuilder.Entity("pet_hotel.Pet", b =>
+            modelBuilder.Entity("pet_hotel.Models.Pet", b =>
                 {
-                    b.HasOne("pet_hotel.PetOwner", "ownedBy")
+                    b.HasOne("pet_hotel.Models.PetOwner", "ownedBy")
                         .WithMany()
                         .HasForeignKey("ownedById")
                         .OnDelete(DeleteBehavior.Cascade)

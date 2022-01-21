@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
 
-namespace pet_hotel
+namespace pet_hotel.Models
 {
     public enum PetBreedType 
     {
@@ -26,6 +26,7 @@ namespace pet_hotel
     }
     public class Pet 
     {
+      
       public int id { get; set; }
       [Required]
       public string name { get; set; }
@@ -37,7 +38,8 @@ namespace pet_hotel
       [Required]
       [JsonConverter(typeof(JsonStringEnumConverter))]
       public PetColorType colorType { get; set; }
-      public DateTime checkedInAt { get; set; }
+      public DateTime? checkedInAt { get; set; }
+      
 
       [Required]
       [ForeignKey("PetOwners")]

@@ -4,12 +4,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace dotnet_bakery.Migrations
 {
-    public partial class CreatePetTable : Migration
+    public partial class CreateInitialTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "PetOwner",
+                name: "PetOwners",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -19,7 +19,7 @@ namespace dotnet_bakery.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PetOwner", x => x.id);
+                    table.PrimaryKey("PK_PetOwners", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -31,16 +31,16 @@ namespace dotnet_bakery.Migrations
                     name = table.Column<string>(type: "text", nullable: false),
                     breedType = table.Column<int>(type: "integer", nullable: false),
                     colorType = table.Column<int>(type: "integer", nullable: false),
-                    checkedInAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    checkedInAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     ownedById = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pets", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Pets_PetOwner_ownedById",
+                        name: "FK_Pets_PetOwners_ownedById",
                         column: x => x.ownedById,
-                        principalTable: "PetOwner",
+                        principalTable: "PetOwners",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -57,7 +57,7 @@ namespace dotnet_bakery.Migrations
                 name: "Pets");
 
             migrationBuilder.DropTable(
-                name: "PetOwner");
+                name: "PetOwners");
         }
     }
 }
