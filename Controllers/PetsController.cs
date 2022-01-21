@@ -30,6 +30,16 @@ namespace pet_hotel.Controllers
         //       // .ToList();
        }
 
+
+        [HttpPost]
+        public Pet Post(Pet pet)
+        {
+          _context.Add(pet);
+          _context.SaveChanges();
+
+          return pet;
+        }
+
         // [HttpGet]
         // [Route("test")]
         // public IEnumerable<Pet> GetPets() {
