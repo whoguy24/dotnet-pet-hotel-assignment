@@ -29,26 +29,26 @@ namespace dotnet_bakery.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "text", nullable: false),
-                    breedType = table.Column<int>(type: "integer", nullable: false),
-                    colorType = table.Column<int>(type: "integer", nullable: false),
+                    breed = table.Column<int>(type: "integer", nullable: false),
+                    color = table.Column<int>(type: "integer", nullable: false),
                     checkedInAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    ownedById = table.Column<int>(type: "integer", nullable: false)
+                    PetOwners = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pets", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Pets_PetOwners_ownedById",
-                        column: x => x.ownedById,
+                        name: "FK_Pets_PetOwners_PetOwners",
+                        column: x => x.PetOwners,
                         principalTable: "PetOwners",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pets_ownedById",
+                name: "IX_Pets_PetOwners",
                 table: "Pets",
-                column: "ownedById");
+                column: "PetOwners");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

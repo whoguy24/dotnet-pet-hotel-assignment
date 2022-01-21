@@ -10,7 +10,7 @@ using pet_hotel.Models;
 namespace dotnet_bakery.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220121162951_CreateInitialTable")]
+    [Migration("20220121171522_CreateInitialTable")]
     partial class CreateInitialTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,25 +28,25 @@ namespace dotnet_bakery.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("breedType")
+                    b.Property<int>("PetOwners")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("breed")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("checkedInAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("colorType")
+                    b.Property<int>("color")
                         .HasColumnType("integer");
 
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("ownedById")
-                        .HasColumnType("integer");
-
                     b.HasKey("id");
 
-                    b.HasIndex("ownedById");
+                    b.HasIndex("PetOwners");
 
                     b.ToTable("Pets");
                 });
@@ -73,13 +73,13 @@ namespace dotnet_bakery.Migrations
 
             modelBuilder.Entity("pet_hotel.Models.Pet", b =>
                 {
-                    b.HasOne("pet_hotel.Models.PetOwner", "ownedBy")
+                    b.HasOne("pet_hotel.Models.PetOwner", "petOwner")
                         .WithMany()
-                        .HasForeignKey("ownedById")
+                        .HasForeignKey("PetOwners")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ownedBy");
+                    b.Navigation("petOwner");
                 });
 #pragma warning restore 612, 618
         }
